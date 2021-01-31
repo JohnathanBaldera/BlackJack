@@ -53,42 +53,42 @@ while play_again:
       print(f"Your cards currently add up to {total}")
 
     #Starting loop for hit me
-    hit_me = True
+      hit_me = True
 
-    while hit_me:
-      choice = input("Want another card? (y or n) \n")
-      if choice == "y":
-        players_cards.append(random.choice(cards))
-        print(players_cards)
-        #If player goes over 21, automatic lost
-        if player_total() > 21:
-          if 11 in players_cards:
-            ace = players_cards.index(11)
-            players_cards[ace] = 1
-            print("Since you went over 21, your ace (11) turned into a 1!")
-            print(players_cards)
-            print(player_total())
-          else:
-            print("You went over 21 and lost :(.")
+      while hit_me:
+        choice = input("Want another card? (y or n) \n")
+        if choice == "y":
+          players_cards.append(random.choice(cards))
+          print(players_cards)
+          #If player goes over 21, automatic lost
+          if player_total() > 21:
+            if 11 in players_cards:
+              ace = players_cards.index(11)
+              players_cards[ace] = 1
+              print("Since you went over 21, your ace (11) turned into a 1!")
+              print(players_cards)
+              print(player_total())
+            else:
+              print("You went over 21 and lost :(.")
+              hit_me = False
+          elif player_total() == 21:
+            print("You have 21!")
             hit_me = False
-        elif player_total() == 21:
-          print("You have 21!")
+          else:
+            total = player_total()
+            print(total)
+        if choice == "n":
           hit_me = False
-        else:
-          total = player_total()
-          print(total)
-      if choice == "n":
-        hit_me = False
-        #Cpu will hit me if total is equal to or under
-        while cpu_cards_total <= 15:
-          cpu_cards.append(random.choice(cards))
-          cpu_cards_total = cpu_total()
-          print(cpu_cards)
-        print(winner())
-    #Asks user to play again
-    again = input("Do you want to play again? (y or n) ")
-    if again == "n":
-      play_again = False
+          #Cpu will hit me if total is equal to or under
+          while cpu_cards_total < total:
+            cpu_cards.append(random.choice(cards))
+            cpu_cards_total = cpu_total()
+            print(f"The computer has {cpu_cards}")
+          print(winner())
+      #Asks user to play again
+      again = input("Do you want to play again? (y or n) ")
+      if again == "n":
+        play_again = False
 
 
 
